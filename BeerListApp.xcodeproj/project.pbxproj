@@ -13,6 +13,7 @@
 		2B4E5C2325B971920029F772 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4E5C2125B971920029F772 /* Main.storyboard */; };
 		2B4E5C2525B971950029F772 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B4E5C2425B971950029F772 /* Assets.xcassets */; };
 		2B4E5C2825B971950029F772 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4E5C2625B971950029F772 /* LaunchScreen.storyboard */; };
+		D4362EB25E98AD7E0D7830C4 /* Pods_BeerListApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40EED3E59F05E544A39D32B3 /* Pods_BeerListApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,9 @@
 		2B4E5C2425B971950029F772 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B4E5C2725B971950029F772 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B4E5C2925B971950029F772 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40EED3E59F05E544A39D32B3 /* Pods_BeerListApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeerListApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB867CBF93AE7896AB366903 /* Pods-BeerListApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerListApp.debug.xcconfig"; path = "Target Support Files/Pods-BeerListApp/Pods-BeerListApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F4FB76F0D7144EFADA7683D7 /* Pods-BeerListApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerListApp.release.xcconfig"; path = "Target Support Files/Pods-BeerListApp/Pods-BeerListApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4362EB25E98AD7E0D7830C4 /* Pods_BeerListApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				2B4E5C1A25B971920029F772 /* BeerListApp */,
 				2B4E5C1925B971920029F772 /* Products */,
+				8738CB58D2912144733BA7B5 /* Pods */,
+				50AA832F3D6BDCC76299B949 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = BeerListApp;
 			sourceTree = "<group>";
 		};
+		50AA832F3D6BDCC76299B949 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				40EED3E59F05E544A39D32B3 /* Pods_BeerListApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8738CB58D2912144733BA7B5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB867CBF93AE7896AB366903 /* Pods-BeerListApp.debug.xcconfig */,
+				F4FB76F0D7144EFADA7683D7 /* Pods-BeerListApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2B4E5C2C25B971950029F772 /* Build configuration list for PBXNativeTarget "BeerListApp" */;
 			buildPhases = (
+				8A952565F405B921AC39AF68 /* [CP] Check Pods Manifest.lock */,
 				2B4E5C1425B971920029F772 /* Sources */,
 				2B4E5C1525B971920029F772 /* Frameworks */,
 				2B4E5C1625B971920029F772 /* Resources */,
+				E41021EA4E87AB58C757B7AC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8A952565F405B921AC39AF68 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BeerListApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E41021EA4E87AB58C757B7AC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BeerListApp/Pods-BeerListApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BeerListApp/Pods-BeerListApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BeerListApp/Pods-BeerListApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2B4E5C1425B971920029F772 /* Sources */ = {
@@ -283,6 +352,7 @@
 		};
 		2B4E5C2D25B971950029F772 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB867CBF93AE7896AB366903 /* Pods-BeerListApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +372,7 @@
 		};
 		2B4E5C2E25B971950029F772 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4FB76F0D7144EFADA7683D7 /* Pods-BeerListApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
