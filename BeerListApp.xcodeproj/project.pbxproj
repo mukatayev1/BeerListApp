@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B05B27725BAB3860040DF2E /* BeersViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05B27625BAB3860040DF2E /* BeersViewModels.swift */; };
 		2B4E5C1C25B971920029F772 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4E5C1B25B971920029F772 /* AppDelegate.swift */; };
 		2B4E5C1E25B971920029F772 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4E5C1D25B971920029F772 /* SceneDelegate.swift */; };
 		2B4E5C2525B971950029F772 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B4E5C2425B971950029F772 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B05B27625BAB3860040DF2E /* BeersViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeersViewModels.swift; sourceTree = "<group>"; };
 		2B4E5C1825B971920029F772 /* BeerListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeerListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B4E5C1B25B971920029F772 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B4E5C1D25B971920029F772 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				2B52DD8625B9B93100D531B7 /* Model */,
 				2BED5ED325B9FFDB00D8188F /* View */,
 				2B4E5C4325B9A27D0029F772 /* Controller */,
+				2BA22F0225BAB998005CE6BD /* ViewModel */,
 				2BBB340925B9A41500A1B7DC /* Constants.swift */,
 				2B4E5C2425B971950029F772 /* Assets.xcassets */,
 				2B4E5C2625B971950029F772 /* LaunchScreen.storyboard */,
@@ -112,6 +115,14 @@
 				2B52DD8725B9B94200D531B7 /* Beer.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2BA22F0225BAB998005CE6BD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2B05B27625BAB3860040DF2E /* BeersViewModels.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		2BED5ED325B9FFDB00D8188F /* View */ = {
@@ -259,6 +270,7 @@
 				2BED5ECE25B9F84F00D8188F /* BeerDetailsViewController.swift in Sources */,
 				2B52DD8425B9AAA800D531B7 /* Service.swift in Sources */,
 				2BED5ED525B9FFF000D8188F /* BeerCell.swift in Sources */,
+				2B05B27725BAB3860040DF2E /* BeersViewModels.swift in Sources */,
 				2B4E5C1C25B971920029F772 /* AppDelegate.swift in Sources */,
 				2B4E5C1E25B971920029F772 /* SceneDelegate.swift in Sources */,
 				2BED5EDE25BA2C8F00D8188F /* DescriptionCell.swift in Sources */,

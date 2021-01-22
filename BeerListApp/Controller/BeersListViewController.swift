@@ -10,8 +10,7 @@ import Alamofire
 import SnapKit
 import Kingfisher
 
-class BeersListViewController: UIViewController {
-    
+class BeersListViewController: UIViewController  {
     //MARK: - Properties
     
     let service = NetworkingService()
@@ -29,15 +28,20 @@ class BeersListViewController: UIViewController {
     
     var selectedItem: Beer!
     
+    private var viewModel: BeersViewModel!
+    
     //MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Beers"
         view.backgroundColor = Colors.white
         configureTableView()
-        fetchBeers()
         configureIndicatorView()
+        
+        viewModel = BeersViewModel(delegate: self)
+        viewModel.fetchFirstBeers()
+        
         //a loading animation in case data is loading slowly
         activityIndicator.startAnimating()
         service.checkServiceResult { (response) in
@@ -57,6 +61,7 @@ class BeersListViewController: UIViewController {
         }
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
     }
     
     func configureIndicatorView() {
@@ -68,26 +73,22 @@ class BeersListViewController: UIViewController {
             make.center.equalToSuperview()
         }
     }
-
-    func fetchBeers() {
-        service.getBeers { (beers) in
-            self.beersArray = beers
-            self.tableView.reloadData()
-        }
-    }
 }
-//MARK: - Extensions
+
+//MARK: - UITableViewDelegate, UITableViewDataSourc
 extension BeersListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return beersArray.count
+        return viewModel.totalCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifiers.beerCell, for: indexPath) as! BeerCell
-        let beerItem = beersArray[indexPath.row]
-        cell.nameLabel.text = beerItem.name
-        cell.beerImageView.kf.setImage(with: URL(string: beerItem.imageURL))
-        cell.taglineLabel.text = beerItem.tagline
+
+        if isLoadingCell(for: indexPath) {
+          cell.configure(with: .none)
+        } else {
+          cell.configure(with: viewModel.beer(at: indexPath.row))
+        }
         
         return cell
     }
@@ -97,11 +98,50 @@ extension BeersListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        selectedItem = beersArray[indexPath.row]
-        tableView.deselectRow(at: indexPath, animated: true)
-        
+        selectedItem = viewModel.beer(at: indexPath.row)
         navigationController?.pushViewController(BeerDetailsViewController(beer: selectedItem), animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         return indexPath
     }
-    
 }
+
+//MARK: - BeersViewModelDelegate
+extension BeersListViewController: BeersViewModelDelegate  {
+    
+    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
+        // 1
+          guard let newIndexPathsToReload = newIndexPathsToReload else {
+            activityIndicator.stopAnimating()
+            tableView.isHidden = false
+            tableView.reloadData()
+            return
+          }
+          // 2
+          let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
+          tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+    }
+    
+    func onFetchFailed(with reason: String) {
+        activityIndicator.stopAnimating()
+        print(reason)
+    }
+}
+
+//MARK: - UITableViewDataSourcePrefetching
+extension BeersListViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        if indexPaths.contains(where: isLoadingCell) {
+          viewModel.fetchBeers()
+        }
+    }
+    
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+      return indexPath.row >= viewModel.currentCount
+    }
+
+    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+      let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows ?? []
+      let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+      return Array(indexPathsIntersection)
+    }
+  }

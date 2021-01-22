@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class BeerCell: UITableViewCell {
     
@@ -34,13 +35,15 @@ class BeerCell: UITableViewCell {
 
         return label
     }()
+    
+//    let indicatorView: UIActivityIndicatorView!
         
         //MARK: - Lifecycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         subviewElements()
-        accessoryType = .disclosureIndicator
+        configure(with: .none)
         
     }
     
@@ -76,6 +79,22 @@ class BeerCell: UITableViewCell {
             make.right.equalTo(contentView.snp.right).inset(20)
         }
     }
+    
+    func configure(with beer: Beer?) {
+      if let beer = beer {
+        beerImageView.kf.setImage(with: URL(string: beer.imageURL))
+        nameLabel.text = beer.name
+        taglineLabel.text = beer.tagline
+//        reputationLabel?.text = moderator.reputation
+//        displayNameLabel.alpha = 1
+//        reputationContainerView.alpha = 1
+//        indicatorView.stopAnimating()
+      }
+//       else {
+//        displayNameLabel.alpha = 0
+//        reputationContainerView.alpha = 0
+////        indicatorView.startAnimating()
+      }
     
 }
 

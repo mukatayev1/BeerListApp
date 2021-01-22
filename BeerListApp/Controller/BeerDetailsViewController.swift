@@ -60,11 +60,7 @@ extension BeerDetailsViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifiers.descriptionCell, for: indexPath) as! DescriptionCell
             cell.descriptionTextLabel.text = beer.description
             
-            for i in 0...beer.foodPairing.count {
-                var index = 0
-                cell.foodPairs.text = beer.foodPairing[index]
-                index += 1
-            }
+            cell.foodPairs.text = beer.foodPairing[0]
             
             return cell
         } else {

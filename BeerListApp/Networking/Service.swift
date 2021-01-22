@@ -14,15 +14,34 @@ class NetworkingService {
     
     let beerArray = [Beer].self
     
+    var page = 1
+    
     //MARK: - Methods
     
-    func getBeers(completion: @escaping ([Beer]) -> Void) {
+    func getInitialBeers(completion: @escaping ([Beer]) -> Void) {
         AF.request(url)
             .validate()
             .responseDecodable(of: beerArray) { response in
                 
-                if let responseValue = response.value {
-                    completion(responseValue)
+                if let beers = response.value {
+                    completion(beers)
+                    self.page = beers.count/25
+                }
+            }
+    }
+    
+    func getBeers(page: Int, completion: @escaping ([Beer]) -> Void) {
+        let parameters: Parameters = ["page": page,
+                                      "per_page": 25
+        ]
+        
+        AF.request(url, parameters: parameters)
+            .validate()
+            .responseDecodable(of: beerArray) { response in
+                
+                if let beers = response.value {
+                    completion(beers)
+                    self.page = beers.count/25
                 }
             }
     }
